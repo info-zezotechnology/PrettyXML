@@ -1,17 +1,18 @@
 import * as vscode from "vscode";
 import { DocumentHelper } from "./documentHelper";
-import { DefaultSettings, Settings } from "./settings";
+import { defaultSettings, Settings } from "./settings";
 import * as childProcess from "child_process";
 import * as path from "path";
 import { JsonInputDto } from "./jsonInputDto";
 import { FormattingActionKind } from "./formattingActionKind";
 import { Logger } from "./logger";
+import { prettyxml } from "./extension";
 
 export class Formatter {
     private extensionContext: vscode.ExtensionContext;
     private dllPath: string = "";
 
-    public settings: Settings = DefaultSettings;
+    public settings: Settings = defaultSettings;
     constructor(context: vscode.ExtensionContext) {
         this.extensionContext = context;
         this.initialize();
@@ -33,15 +34,17 @@ export class Formatter {
             Logger.instance.info(`dllPath : ${this.dllPath}`);
         }
         catch (error) {
-            Logger.instance.error(error as Error);
-            throw error;
+            if (error instanceof Error) {
+                Logger.instance.error(error);
+                throw error;
+            }
         }
     }
 
     public loadSettings() {
         //get settings
         Logger.instance.info("loadSettings start");
-        let prettyXmlConfig = vscode.workspace.getConfiguration('prettyxml.settings');
+        let prettyXmlConfig = vscode.workspace.getConfiguration(`${prettyxml}.settings`);
 
         let spacelength = prettyXmlConfig.get<number>('indentSpaceLength');
         let usesinglequotes = prettyXmlConfig.get<boolean>('useSingleQuotes');
@@ -53,7 +56,12 @@ export class Formatter {
         let allowWhiteSpaceUnicodesInAttributeValues = prettyXmlConfig.get<boolean>('allowWhiteSpaceUnicodesInAttributeValues');
         let positionFirstAttributeOnSameLine = prettyXmlConfig.get<boolean>('positionFirstAttributeOnSameLine');
         let positionAllAttributesOnFirstLine = prettyXmlConfig.get<boolean>('positionAllAttributesOnFirstLine');
+        let preserveWhiteSpacesInComment = prettyXmlConfig.get<boolean>('preserveWhiteSpacesInComment');
+        let addSpaceBeforeEndOfXmlDeclaration = prettyXmlConfig.get<boolean>('addSpaceBeforeEndOfXmlDeclaration');
+        let attributesInNewlineThreshold = prettyXmlConfig.get<number>("attributesInNewlineThreshold");
+        let wildCardedExceptionsForPositionAllAttributesOnFirstLine = prettyXmlConfig.get<Array<string>>("wildCardedExceptionsForPositionAllAttributesOnFirstLine");
         let enableLogs = prettyXmlConfig.get<boolean>('enableLogs');
+        Logger.instance.updateConfiguration(enableLogs);
 
         this.settings = new Settings(spacelength,
             usesinglequotes,
@@ -65,9 +73,14 @@ export class Formatter {
             allowWhiteSpaceUnicodesInAttributeValues,
             positionFirstAttributeOnSameLine,
             positionAllAttributesOnFirstLine,
+            preserveWhiteSpacesInComment,
+            addSpaceBeforeEndOfXmlDeclaration,
+            attributesInNewlineThreshold,
+            wildCardedExceptionsForPositionAllAttributesOnFirstLine,
             enableLogs);
 
-        Logger.instance.updateConfiguration(enableLogs);
+        Logger.instance.info(`Settings : ${JSON.stringify(this.settings)}`);
+
         Logger.instance.info("loadSettings end");
     }
 
@@ -132,11 +145,11 @@ export class Formatter {
             let promise = new Promise<string>((resolve, reject) => {
                 cli.on("close", (exitCode: Number) => {
                     if (exitCode !== 0) {
-                        Logger.instance.warning(`childProcess errored with exitCode ${ exitCode }`);
+                        Logger.instance.warning(`childProcess errored with exitCode ${exitCode}`);
                         reject(stdErrData);
                     }
                     else {
-                        Logger.instance.info(`childProcess stdOutData:  ${ stdOutData }`);
+                        Logger.instance.info(`childProcess stdOutData:  ${stdOutData}`);
                         resolve(stdOutData);
                     }
                 });
@@ -146,8 +159,12 @@ export class Formatter {
             return promise;
         }
         catch (error) {
-            let err = error as Error;
-            Logger.instance.error(err);
+            if (error instanceof Error) {
+                Logger.instance.error(error);
+            }
+            else if (typeof error === "string") {
+                Logger.instance.warning(error);
+            }
             Logger.instance.warning("Error formatting with command line. Make sure you have dotnet 6+ installed and it is added to PATH.");
             throw new Error('Error formatting with command line. Make sure you have dotnet 6+ installed and it is added to PATH.');
         }

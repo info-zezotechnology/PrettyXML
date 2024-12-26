@@ -2,6 +2,104 @@
 
 ## Stable
 
+## 5.2.0: 26-Dec-2024
+
+- Added feature [Allow the user to specify which elements have attributes on separate lines](https://github.com/pmahend1/PrettyXML/issues/162)
+- Package updates to latest.
+
+## 5.1.0: 29-Nov-2024
+
+- Fixes [Formatting doesn't seem to work when using with .xaml files.](https://github.com/pmahend1/PrettyXML/issues/167)
+- Yarn upgrades to latest.
+  
+## 5.0.3: 01-Sep-2024
+
+- Yarn upgrades.
+- Fixes [Regular Expression Denial of Service (ReDoS) in micromatch](https://nvd.nist.gov/vuln/detail/CVE-2024-4067)
+
+## 5.0.1/5.0.2: 18-Jun-2024
+
+- Yarn upgrades.
+- Fixes [braces vulnerability](https://github.com/advisories/GHSA-grv7-fg5c-xmjg)
+
+## 5.0.0: 11-May-2024
+
+- Updated Dotnet dependency to version 8.
+
+## 4.5.1: 16-Apr-2024
+
+- Yarn upgrades.
+- Fixed shield.io badges for open-vsx.
+
+## 4.5.0: 5-Apr-2024
+
+- Yarn upgrades.
+- Added funding info on repository.
+
+## 4.4.1: 25-Feb-2024
+
+- **Attributes In Newline Threshold** setting information added.
+
+## 4.4.0: 25-Feb-2024
+
+- **Attributes In Newline Threshold** setting added.
+
+## 4.3.0: 23-Feb-2024
+
+- Fixed some CDATA and text formatting.
+- Yarn upgrades.
+
+### 4.2.0: 04-Feb-2024
+
+- Added setting `addSpaceBeforeEndOfXmlDeclaration`
+
+### 4.1.3: 03-Feb-2024
+
+- Fix for [#141: Some comments are lost after format](https://github.com/pmahend1/PrettyXML/issues/141).
+
+### 4.1.2: 03-Feb-2024
+
+- Fixes [#139: "Position All Attributes On First Line" not work](https://github.com/pmahend1/PrettyXML/issues/139)
+
+### 4.1.1: 01-Feb-2024
+
+- Fixes [#137: Apple Plist/MobileConfig files create error after first format](https://github.com/pmahend1/PrettyXML/issues/137).
+- Yarn upgrades.
+
+### 4.1.0: 31-Jan-2024
+
+- Added [`AXAML`](https://docs.avaloniaui.net/docs/basics/user-interface/introduction-to-xaml) support for Avalonia.
+
+### 4.0.0: 31-Jan-2024
+
+- Removed Newtonsoft.Json dependency.
+- Yarn upgrades.
+- Fixed an issue where errors where not shown to users.
+
+### 3.8.0: 21-Dec-2023
+
+- Yarn upgrades
+- Added option to unescape `>` character in attribute values.
+
+### 3.7.0: 10-Nov-2023
+
+- Yarn upgrades.
+- Review prompt won't show for the very first time.
+
+### 3.6.0: 20-Sep-2023
+
+- Yarn upgrades.
+
+### 3.5.0: 30-Jul-2023
+
+- Yarn upgrades.
+- Updated ReadMe to reflect latest settings.
+
+### 3.4.0: 11-Jul-2023
+
+- Added setting to preserve whitespaces in comments.
+- Yarn upgrades.
+
 ### 3.3.0: 18-May-2023
 
 - Implemented optional logger.

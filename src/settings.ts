@@ -1,69 +1,85 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-export interface ISettings
-{
-    IndentLength: number;
-    UseSingleQuotes: boolean;
-    UseSelfClosingTags: boolean;
-    FormatOnSave: boolean;
-    AllowSingleQuoteInAttributeValue: boolean;
-    AddSpaceBeforeSelfClosingTag: boolean;
-    WrapCommentTextWithSpaces: boolean;
-    AllowWhiteSpaceUnicodesInAttributeValues: boolean;
-    PositionFirstAttributeOnSameLine: boolean;
-    PositionAllAttributesOnFirstLine: boolean;
-    EnableLogs: boolean;
+export interface ISettings {
+    indentLength: number;
+    useSingleQuotes: boolean;
+    useSelfClosingTags: boolean;
+    formatOnSave: boolean;
+    allowSingleQuoteInAttributeValue: boolean;
+    addSpaceBeforeSelfClosingTag: boolean;
+    wrapCommentTextWithSpaces: boolean;
+    allowWhiteSpaceUnicodesInAttributeValues: boolean;
+    positionFirstAttributeOnSameLine: boolean;
+    positionAllAttributesOnFirstLine: boolean;
+    preserveWhiteSpacesInComment: boolean;
+    addSpaceBeforeEndOfXmlDeclaration: boolean;
+    attributesInNewlineThreshold: number;
+    wildCardedExceptionsForPositionAllAttributesOnFirstLine?: [string];
+    enableLogs: boolean;
 }
 
-export const DefaultSettings: ISettings = {
-                                            IndentLength: 4,
-                                            UseSingleQuotes: false,
-                                            UseSelfClosingTags: true,
-                                            FormatOnSave: false,
-                                            AllowSingleQuoteInAttributeValue: true,
-                                            AddSpaceBeforeSelfClosingTag: true,
-                                            WrapCommentTextWithSpaces: true,
-                                            AllowWhiteSpaceUnicodesInAttributeValues: true,
-                                            PositionFirstAttributeOnSameLine: true,
-                                            PositionAllAttributesOnFirstLine: false,
-                                            EnableLogs: false
-                                          };
+export const defaultSettings: ISettings = {
+    indentLength: 4,
+    useSingleQuotes: false,
+    useSelfClosingTags: true,
+    formatOnSave: false,
+    allowSingleQuoteInAttributeValue: true,
+    addSpaceBeforeSelfClosingTag: true,
+    wrapCommentTextWithSpaces: true,
+    allowWhiteSpaceUnicodesInAttributeValues: true,
+    positionFirstAttributeOnSameLine: true,
+    positionAllAttributesOnFirstLine: false,
+    preserveWhiteSpacesInComment: false,
+    addSpaceBeforeEndOfXmlDeclaration: false,
+    attributesInNewlineThreshold: 1,
+    wildCardedExceptionsForPositionAllAttributesOnFirstLine: undefined,
+    enableLogs: false
+};
 
-export class Settings
-{
-    IndentLength?: number;
-    UseSingleQuotes?: boolean;
-    UseSelfClosingTags?: boolean;
-    FormatOnSave?: boolean;
-    AllowSingleQuoteInAttributeValue?: boolean;
-    AddSpaceBeforeSelfClosingTag?: boolean;
-    WrapCommentTextWithSpaces?: boolean;
-    AllowWhiteSpaceUnicodesInAttributeValues?: boolean;
-    PositionFirstAttributeOnSameLine?: boolean;
-    PositionAllAttributesOnFirstLine?: boolean;
-    EnableLogs?: boolean;
+export class Settings {
+    indentLength?: number;
+    useSingleQuotes?: boolean;
+    useSelfClosingTags?: boolean;
+    formatOnSave?: boolean;
+    allowSingleQuoteInAttributeValue?: boolean;
+    addSpaceBeforeSelfClosingTag?: boolean;
+    wrapCommentTextWithSpaces?: boolean;
+    allowWhiteSpaceUnicodesInAttributeValues?: boolean;
+    positionFirstAttributeOnSameLine?: boolean;
+    positionAllAttributesOnFirstLine?: boolean;
+    preserveWhiteSpacesInComment?: boolean;
+    addSpaceBeforeEndOfXmlDeclaration: boolean;
+    attributesInNewlineThreshold: number;
+    wildCardedExceptionsForPositionAllAttributesOnFirstLine?: string[];
+    enableLogs?: boolean;
 
     constructor(indentLengh?: number,
-                useSingleQuotes?: boolean,
-                useSelfClosingTags?: boolean,
-                formatOnSave?: boolean,
-                allowSingleQuoteInAttributeValue?: boolean,
-                addSpaceBeforeSelfClosingTag?: boolean,
-                wrapCommentTextWithSpaces?: boolean,
-                allowWhiteSpaceUnicodesInAttributeValues?: boolean,
-                positionFirstAttributeOnSameLine?: boolean,
-                positionAllAttributesOnFirstLine?: boolean,
-                enableLogs?: boolean)
-    {
-        this.IndentLength = indentLengh ?? DefaultSettings.IndentLength;
-        this.UseSingleQuotes = useSingleQuotes ?? DefaultSettings.UseSingleQuotes;
-        this.UseSelfClosingTags = useSelfClosingTags ?? DefaultSettings.UseSelfClosingTags;
-        this.FormatOnSave = formatOnSave ?? DefaultSettings.FormatOnSave;
-        this.AllowSingleQuoteInAttributeValue = allowSingleQuoteInAttributeValue ?? DefaultSettings.AllowSingleQuoteInAttributeValue;
-        this.AddSpaceBeforeSelfClosingTag = addSpaceBeforeSelfClosingTag ?? DefaultSettings.AddSpaceBeforeSelfClosingTag;
-        this.WrapCommentTextWithSpaces = wrapCommentTextWithSpaces ?? DefaultSettings.WrapCommentTextWithSpaces;
-        this.AllowWhiteSpaceUnicodesInAttributeValues = allowWhiteSpaceUnicodesInAttributeValues ?? DefaultSettings.AllowWhiteSpaceUnicodesInAttributeValues;
-        this.PositionFirstAttributeOnSameLine = positionFirstAttributeOnSameLine ?? DefaultSettings.PositionFirstAttributeOnSameLine;
-        this.PositionAllAttributesOnFirstLine = positionAllAttributesOnFirstLine ?? DefaultSettings.PositionAllAttributesOnFirstLine;
-        this.EnableLogs = enableLogs ?? DefaultSettings.EnableLogs;
+        useSingleQuotes?: boolean,
+        useSelfClosingTags?: boolean,
+        formatOnSave?: boolean,
+        allowSingleQuoteInAttributeValue?: boolean,
+        addSpaceBeforeSelfClosingTag?: boolean,
+        wrapCommentTextWithSpaces?: boolean,
+        allowWhiteSpaceUnicodesInAttributeValues?: boolean,
+        positionFirstAttributeOnSameLine?: boolean,
+        positionAllAttributesOnFirstLine?: boolean,
+        preserveWhiteSpacesInComment?: boolean,
+        addSpaceBeforeEndOfXmlDeclaration?: boolean,
+        attributesInNewlineThreshold?: number,
+        wildCardedExceptionsForPositionAllAttributesOnFirstLine?: string[],
+        enableLogs?: boolean) {
+        this.indentLength = indentLengh ?? defaultSettings.indentLength;
+        this.useSingleQuotes = useSingleQuotes ?? defaultSettings.useSingleQuotes;
+        this.useSelfClosingTags = useSelfClosingTags ?? defaultSettings.useSelfClosingTags;
+        this.formatOnSave = formatOnSave ?? defaultSettings.formatOnSave;
+        this.allowSingleQuoteInAttributeValue = allowSingleQuoteInAttributeValue ?? defaultSettings.allowSingleQuoteInAttributeValue;
+        this.addSpaceBeforeSelfClosingTag = addSpaceBeforeSelfClosingTag ?? defaultSettings.addSpaceBeforeSelfClosingTag;
+        this.wrapCommentTextWithSpaces = wrapCommentTextWithSpaces ?? defaultSettings.wrapCommentTextWithSpaces;
+        this.allowWhiteSpaceUnicodesInAttributeValues = allowWhiteSpaceUnicodesInAttributeValues ?? defaultSettings.allowWhiteSpaceUnicodesInAttributeValues;
+        this.positionFirstAttributeOnSameLine = positionFirstAttributeOnSameLine ?? defaultSettings.positionFirstAttributeOnSameLine;
+        this.positionAllAttributesOnFirstLine = positionAllAttributesOnFirstLine ?? defaultSettings.positionAllAttributesOnFirstLine;
+        this.preserveWhiteSpacesInComment = preserveWhiteSpacesInComment ?? defaultSettings.preserveWhiteSpacesInComment;
+        this.addSpaceBeforeEndOfXmlDeclaration = addSpaceBeforeEndOfXmlDeclaration ?? defaultSettings.addSpaceBeforeEndOfXmlDeclaration;
+        this.attributesInNewlineThreshold = attributesInNewlineThreshold ?? defaultSettings.attributesInNewlineThreshold;
+        this.wildCardedExceptionsForPositionAllAttributesOnFirstLine = wildCardedExceptionsForPositionAllAttributesOnFirstLine;
+        this.enableLogs = enableLogs ?? defaultSettings.enableLogs;
     }
 }
